@@ -14,8 +14,8 @@ use super::*;
 use crate::{
     assertions::{
         assert_derivation, assert_initialized, assert_mint_authority_matches_mint, assert_owned_by,
-        assert_token_program_matches_package, edition::assert_edition_valid,
-        metadata::assert_update_authority_is_correct,
+        assert_owned_by_token_or_token_2022, assert_token_program_matches_package,
+        edition::assert_edition_valid, metadata::assert_update_authority_is_correct,
     },
     error::MetadataError,
     state::{
@@ -64,8 +64,12 @@ pub fn process_mint_new_edition_from_master_edition_via_token_logic<'a>(
     } = accounts;
 
     assert_token_program_matches_package(token_program_account_info)?;
-    assert_owned_by(mint_info, &spl_token::id())?;
-    assert_owned_by(token_account_info, &spl_token::id())?;
+    assert_owned_by_token_or_token_2022(mint_info, &spl_token::id(), &spl_token_2022::id())?;
+    assert_owned_by_token_or_token_2022(
+        token_account_info,
+        &spl_token::id(),
+        &spl_token_2022::id(),
+    )?;
     assert_owned_by(master_edition_account_info, program_id)?;
     assert_owned_by(master_metadata_account_info, program_id)?;
 
