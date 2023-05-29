@@ -3,7 +3,7 @@ set -euo pipefail
 
 solana airdrop -k program_ids/owner.json 1000
 
-cargo build-bpf
+cargo build-bpf -- --ignore-rust-version
 
 solana program deploy \
 --program-id program_ids/token-metadata.json \
