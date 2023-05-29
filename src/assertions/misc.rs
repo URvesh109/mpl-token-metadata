@@ -121,6 +121,19 @@ pub fn assert_owned_by(account: &AccountInfo, owner: &Pubkey) -> ProgramResult {
     mpl_utils::assert_owned_by(account, owner, MetadataError::IncorrectOwner)
 }
 
+pub fn assert_owned_by_token_or_token_2022(
+    account: &AccountInfo,
+    owner1: &Pubkey,
+    owner2: &Pubkey,
+) -> ProgramResult {
+    mpl_utils::assert_owned_by_token_or_token_2022(
+        account,
+        owner1,
+        owner2,
+        MetadataError::IncorrectOwner,
+    )
+}
+
 pub fn assert_token_program_matches_package(token_program_info: &AccountInfo) -> ProgramResult {
     mpl_utils::token::assert_token_program_matches_package(
         token_program_info,

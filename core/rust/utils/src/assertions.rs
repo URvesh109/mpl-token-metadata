@@ -39,6 +39,19 @@ pub fn assert_owned_by(
     }
 }
 
+pub fn assert_owned_by_token_or_token_2022(
+    account: &AccountInfo,
+    owner1: &Pubkey,
+    owner2: &Pubkey,
+    error: impl Into<ProgramError>,
+) -> ProgramResult {
+    if account.owner != owner1 && account.owner != owner2 {
+        Err(error.into())
+    } else {
+        Ok(())
+    }
+}
+
 pub fn assert_derivation(
     program_id: &Pubkey,
     account: &AccountInfo,
